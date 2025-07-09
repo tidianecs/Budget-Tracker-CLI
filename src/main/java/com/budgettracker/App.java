@@ -9,7 +9,6 @@ public class App {
         Scanner scanner = new Scanner(System.in);
         int repetition = 0;
 
-        //Just a test but that definitly not the final menu
         while (repetition != 1) {
             System.out.println("====== Budget Tracker ======\n1. Add transaction\n2. Delete transaction\n3. Show transactions\n4. Show expenses by category\n5. Exit\n============================");
             int modeChoice = scanner.nextInt();

@@ -8,14 +8,14 @@ public class Transaction {
     private double amount;
     private String type;
     private String category;
-    private LocalDate date;
+    private String date;
 
     Transaction(double amount, String type, String category){
         this.id = ++counter;
         this.amount = amount;
         this.type = type;
         this.category = category;
-        this.date = LocalDate.now();
+        this.date = LocalDate.now().toString();
     }
 
     //set and get methods
@@ -47,7 +47,7 @@ public class Transaction {
         this.category = category;
     }
 
-    public LocalDate getDate() {
+    public String getDate() {
         return date;
     }
 }

@@ -1,39 +1,34 @@
 package com.budgettracker;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Reader;
 import java.util.ArrayList;
+import java.util.Arrays;
+import com.google.gson.Gson;
 
 public class TransactionService {
     private ArrayList<Transaction> transactions = new ArrayList<>();
-    /*private ArrayList<Transaction> foodExpenses = new ArrayList<>();
-    private ArrayList<Transaction> carExpenses = new ArrayList<>();
-    private ArrayList<Transaction> phoneExpenses = new ArrayList<>();
-    */private double balance;
+    private Gson gson = new Gson();
+    private double balance;
     private double expBalance;
+
+    public TransactionService(){
+        loadData();
+    }
 
     public void addTransac(Transaction transaction){
         transactions.add(transaction);
-
-        /*if (transaction.getType().equalsIgnoreCase("expense")) {
-            switch (transaction.getCategory()) {
-                case "food" -> foodExpenses.add(transaction);
-                case "car" -> carExpenses.add(transaction);
-                case "phone" -> phoneExpenses.add(transaction);
-            }*/
+        saveData();
     }
 
     public void delTransac(int id){
         for(int i = 0; i < transactions.size(); i++){
             if (i == id) {
                 transactions.remove(i);
-
-                /*if (transactions.get(i).getType().equalsIgnoreCase("expense")) {
-                    switch (transactions.get(i).getCategory()) {
-                        case "food" -> foodExpenses.remove(transactions.get(i));
-                        case "car" -> carExpenses.remove(transactions.get(i));
-                        case "phone" -> phoneExpenses.remove(transactions.get(i));
-                    }
-                */
             }
-        }
+        }saveData();
     }
     
 
@@ -74,4 +69,30 @@ public class TransactionService {
         }
         return expBalance;
     }
+
+    public void saveData(){
+        try(FileWriter writer = new FileWriter("C:\\Users\\hp\\Desktop\\CodingProject\\budgetTrackerCli\\budget_tracker_cli\\src\\main\\java\\com\\budgettracker\\transactions.json")){
+            gson.toJson(transactions, writer);
+        } catch (IOException error){
+            error.printStackTrace();
+        }
+    }
+
+    public void loadData() {
+        try (Reader reader = new FileReader("C:\\Users\\hp\\Desktop\\CodingProject\\budgetTrackerCli\\budget_tracker_cli\\src\\main\\java\\com\\budgettracker\\transactions.json")) {
+            File file = new File("C:\\Users\\hp\\Desktop\\CodingProject\\budgetTrackerCli\\budget_tracker_cli\\src\\main\\java\\com\\budgettracker\\transactions.json");
+
+            //if the file is empty
+            if (file.length() == 0) {
+                transactions = new ArrayList<>();
+                return;
+            }
+
+            Transaction[] loadedTransac = gson.fromJson(reader, Transaction[].class);
+            transactions = new ArrayList<>(Arrays.asList(loadedTransac));
+        } catch (IOException error) {
+            error.printStackTrace();
+        }
+}
+
 }
