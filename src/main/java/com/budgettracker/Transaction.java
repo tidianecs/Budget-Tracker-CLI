@@ -3,7 +3,7 @@ import java.time.LocalDate;
 
 
 public class Transaction {
-    private static int counter = -1;
+    //private static int counter = -1;
     private int id;
     private double amount;
     private String type;
@@ -11,7 +11,8 @@ public class Transaction {
     private String date;
 
     Transaction(double amount, String type, String category){
-        this.id = ++counter;
+        this.id = id;
+        //++counter;
         this.amount = amount;
         this.type = type;
         this.category = category;
@@ -21,6 +22,10 @@ public class Transaction {
     //set and get methods
     public int getId(){
         return id;
+    }
+
+    public void setId(int id){
+        this.id = id;
     }
 
     public double getAmount() {

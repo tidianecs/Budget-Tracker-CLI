@@ -11,6 +11,7 @@ import com.google.gson.Gson;
 public class TransactionService {
     private ArrayList<Transaction> transactions = new ArrayList<>();
     private Gson gson = new Gson();
+    private int id = 0;
     private double balance;
     private double expBalance;
 
@@ -19,6 +20,7 @@ public class TransactionService {
     }
 
     public void addTransac(Transaction transaction){
+        transaction.setId(id++);
         transactions.add(transaction);
         saveData();
     }
@@ -89,10 +91,20 @@ public class TransactionService {
             }
 
             Transaction[] loadedTransac = gson.fromJson(reader, Transaction[].class);
-            transactions = new ArrayList<>(Arrays.asList(loadedTransac));
+            if (loadedTransac != null) {
+                transactions = new ArrayList<>(Arrays.asList(loadedTransac));
+                //To get a unique id even if we run quit and come back
+                int maxId = 0;
+                for(Transaction transaction : transactions){
+                    if (transaction.getId() > maxId) {
+                        maxId = transaction.getId();
+                    }
+                }
+                id = maxId + 1;
+                }
         } catch (IOException error) {
             error.printStackTrace();
         }
-}
+    }
 
 }

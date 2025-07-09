@@ -1,1 +1,1 @@
-[{"id":0,"amount":2300.0,"type":"income","category":"-","date":"2025-07-09"},{"id":2,"amount":240.2,"type":"expense","category":"food","date":"2025-07-09"}]
+[{"id":0,"amount":2500.0,"type":"income","category":"-","date":"2025-07-09"},{"id":1,"amount":123.0,"type":"expense","category":"food","date":"2025-07-09"},{"id":2,"amount":250.0,"type":"expense","category":"car","date":"2025-07-09"},{"id":3,"amount":15.0,"type":"expense","category":"phone","date":"2025-07-09"}]
