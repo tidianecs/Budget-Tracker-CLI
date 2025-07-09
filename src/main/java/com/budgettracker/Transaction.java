@@ -1,13 +1,17 @@
 package com.budgettracker;
 import java.time.LocalDate;
 
+
 public class Transaction {
+    private static int counter = -1;
+    private int id;
     private double amount;
     private String type;
     private String category;
     private LocalDate date;
 
     Transaction(double amount, String type, String category){
+        this.id = ++counter;
         this.amount = amount;
         this.type = type;
         this.category = category;
@@ -15,6 +19,10 @@ public class Transaction {
     }
 
     //set and get methods
+    public int getId(){
+        return id;
+    }
+
     public double getAmount() {
         return amount;
     }
@@ -41,10 +49,5 @@ public class Transaction {
 
     public LocalDate getDate() {
         return date;
-    }
-
-    //That was just for a test but i will create a class to manage transaction
-    public String showTransaction(){
-        return "[" + type.toUpperCase() + "]" + " | " + amount + " | " + category + " | " + date;
     }
 }
